@@ -134,7 +134,7 @@ async def initiate_magnet(client, message, link, flags):
     else:
         await handle_leech(client, message, gid, reply, user_id, flags)
 
-@Client.on_message(filters.command(['directdl', 'direct', 'zipdirectdl', 'zipdirect', 'filedirectdl', 'filedirect']) & filters.chat(ALL_CHATS))
+@Client.on_message(filters.command(['leechvideo', 'leechvideo1', 'zipdirectdl', 'zipdirect', 'leechfile', 'leechfile1']) & filters.chat(ALL_CHATS))
 async def directdl_cmd(client, message):
     text = message.text.split(None, 1)
     command = text.pop(0).lower()
@@ -162,10 +162,10 @@ async def directdl_cmd(client, message):
 - /zipdirect <i>&lt;Direct URL&gt; | optional custom file name</i>
 - /zipdirect <i>(as reply to a Direct URL) | optional custom file name</i>
 
-- /filedirectdl <i>&lt;Direct URL&gt; | optional custom file name</i> - Sends videos as files
-- /filedirectdl <i>(as reply to a Direct URL) | optional custom file name</i> - Sends videos as files
-- /filedirect <i>&lt;Direct URL&gt; | optional custom file name</i> - Sends videos as files
-- /filedirect <i>(as reply to a Direct URL) | optional custom file name</i> - Sends videos as files''')
+- /leechfile <i>&lt;Direct URL&gt; | optional custom file name</i> - Sends videos as files
+- /leechfile <i>(as reply to a Direct URL) | optional custom file name</i> - Sends videos as files
+- /leechfile1 <i>&lt;Direct URL&gt; | optional custom file name</i> - Sends videos as files
+- /leechfile1 <i>(as reply to a Direct URL) | optional custom file name</i> - Sends videos as files''')
         return
     split = link.split('|', 1)
     if len(split) > 1:
@@ -187,13 +187,13 @@ async def directdl_cmd(client, message):
         await message.reply_text('Invalid scheme')
         return
     link = urlunparse(parsed)
-    await initiate_leechvideo(client, message, link, filename, flags)
+    await initiate_directdl(client, message, link, filename, flags)
 
-async def initiate_leechvideo(client, message, link, filename, flags):
+async def initiate_directdl(client, message, link, filename, flags):
     user_id = message.from_user.id
     reply = await message.reply_text('Adding url...')
     try:
-        gid = await asyncio.wait_for(aria2_add_leechvideo(session, user_id, link, filename, LEECH_TIMEOUT), MAGNET_TIMEOUT)
+        gid = await asyncio.wait_for(aria2_add_directdl(session, user_id, link, filename, LEECH_TIMEOUT), MAGNET_TIMEOUT)
     except Aria2Error as ex:
         await asyncio.gather(message.reply_text(f'Aria2 Error Occured!\n{ex.error_code}: {html.escape(ex.error_message)}'), reply.delete())
     except asyncio.TimeoutError:
@@ -381,10 +381,10 @@ help_dict['leech'] = ('Leech',
 /zipdirect <i>&lt;Direct URL&gt; | optional custom file name</i>
 /zipdirect <i>(as reply to a Direct URL) | optional custom file name</i>
 
-/filedirectdl <i>&lt;Direct URL&gt; | optional custom file name</i> - Sends videos as files
-/filedirectdl <i>(as reply to a Direct URL) | optional custom file name</i> - Sends videos as files
-/filedirect <i>&lt;Direct URL&gt; | optional custom file name</i> - Sends videos as files
-/filedirect <i>(as reply to a Direct URL) | optional custom file name</i> - Sends videos as files
+/leechfile <i>&lt;Direct URL&gt; | optional custom file name</i> - Sends videos as files
+/leechfile <i>(as reply to a Direct URL) | optional custom file name</i> - Sends videos as files
+/leechfile1 <i>&lt;Direct URL&gt; | optional custom file name</i> - Sends videos as files
+/leechfile1 <i>(as reply to a Direct URL) | optional custom file name</i> - Sends videos as files
 
 /cancel <i>&lt;GID&gt;</i>
 /cancel <i>(as reply to status message)</i>
