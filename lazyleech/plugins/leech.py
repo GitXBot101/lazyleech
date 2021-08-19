@@ -371,10 +371,10 @@ help_dict['leech'] = ('Leech',
 /filemagnet <i>&lt;Magnet URL&gt;</i> - Sends videos as files
 /filemagnet <i>(as reply to a Magnet URL)</i> - Sends videos as files
 
-/directdl <i>&lt;Direct URL&gt; | optional custom file name</i>
-/directdl <i>(as reply to a Direct URL) | optional custom file name</i>
-/direct <i>&lt;Direct URL&gt; | optional custom file name</i>
-/direct <i>(as reply to a Direct URL) | optional custom file name</i>
+/leechvideo <i>&lt;Direct URL&gt; | optional custom file name</i>
+/leechvideo <i>(as reply to a Direct URL) | optional custom file name</i>
+/leechvideo1 <i>&lt;Direct URL&gt; | optional custom file name</i>
+/leechvideo1 <i>(as reply to a Direct URL) | optional custom file name</i>
 
 /zipdirectdl <i>&lt;Direct URL&gt; | optional custom file name</i>
 /zipdirectdl <i>(as reply to a Direct URL) | optional custom file name</i>
