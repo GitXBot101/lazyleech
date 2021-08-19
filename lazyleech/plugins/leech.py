@@ -134,7 +134,7 @@ async def initiate_magnet(client, message, link, flags):
     else:
         await handle_leech(client, message, gid, reply, user_id, flags)
 
-@Client.on_message(filters.command(['leechvideo@MMLeechv5_bot', 'leechvideo1@MMLeechv5_bot', 'zipdirectdl', 'zipdirect', 'leechfile@MMLeechv5_bot', 'leechfile1@MMLeechv5_bot']) & filters.chat(ALL_CHATS))
+@Client.on_message(filters.command(['leechvideo', 'leechvideo1', 'zipdirectdl', 'zipdirect', 'leechfile@MMLeechv5_bot', 'leechfile1@MMLeechv5_bot']) & filters.chat(ALL_CHATS))
 async def directdl_cmd(client, message):
     text = message.text.split(None, 1)
     command = text.pop(0).lower()
