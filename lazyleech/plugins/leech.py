@@ -154,8 +154,8 @@ async def directdl_cmd(client, message):
         await message.reply_text('''Usage:
 - /leechvideo <i>&lt;Direct URL&gt; | optional custom file name</i>
 - /leechvideo <i>(as reply to a Direct URL) | optional custom file name</i>
-- /leechvideo <i>&lt;Direct URL&gt; | optional custom file name</i>
-- /leechvideo <i>(as reply to a Direct URL) | optional custom file name</i>
+- /leechvideo1 <i>&lt;Direct URL&gt; | optional custom file name</i>
+- /leechvideo1 <i>(as reply to a Direct URL) | optional custom file name</i>
 
 - /zipdirectdl <i>&lt;Direct URL&gt; | optional custom file name</i>
 - /zipdirectdl <i>(as reply to a Direct URL) | optional custom file name</i>
