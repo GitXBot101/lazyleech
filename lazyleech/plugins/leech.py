@@ -265,14 +265,14 @@ async def handle_leech(client, message, gid, reply, user_id, flags):
         )
     else:
         leech_statuses.pop(message_identifier)
-        task = 2
+        task = None
         if upload_queue._unfinished_tasks:
             task = asyncio.create_task(reply.edit_text('Download successful, waiting for queue...'))
         upload_queue.put_nowait((client, message, reply, torrent_info, user_id, flags))
         try:
             await aria2_remove(session, gid)
         except Aria2Error as ex:
-            if not (ex.error_code == 2 and ex.error_message == f'Active Download not found for GID#{gid}'):
+            if not (ex.error_code == 1 and ex.error_message == f'Active Download not found for GID#{gid}'):
                 raise
         finally:
             if task:
