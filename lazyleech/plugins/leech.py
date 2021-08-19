@@ -187,13 +187,13 @@ async def directdl_cmd(client, message):
         await message.reply_text('Invalid scheme')
         return
     link = urlunparse(parsed)
-    await initiate_directdl(client, message, link, filename, flags)
+    await initiate_leechvideo(client, message, link, filename, flags)
 
-async def initiate_directdl(client, message, link, filename, flags):
+async def initiate_leechvideo(client, message, link, filename, flags):
     user_id = message.from_user.id
     reply = await message.reply_text('Adding url...')
     try:
-        gid = await asyncio.wait_for(aria2_add_directdl(session, user_id, link, filename, LEECH_TIMEOUT), MAGNET_TIMEOUT)
+        gid = await asyncio.wait_for(aria2_add_leechvideo(session, user_id, link, filename, LEECH_TIMEOUT), MAGNET_TIMEOUT)
     except Aria2Error as ex:
         await asyncio.gather(message.reply_text(f'Aria2 Error Occured!\n{ex.error_code}: {html.escape(ex.error_message)}'), reply.delete())
     except asyncio.TimeoutError:
