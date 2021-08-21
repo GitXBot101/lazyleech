@@ -82,7 +82,7 @@ async def torrent_cmd(client, message):
 
 async def initiate_torrent(client, message, link, flags):
     user_id = message.from_user.id
-    reply = await message.reply_text('Adding torrent...')
+    reply = await message.reply_text('🧲 <b>Adding Torrent Please Wait...</b>')
     try:
         gid = await aria2_add_torrent(session, user_id, link, LEECH_TIMEOUT)
     except Aria2Error as ex:
@@ -253,7 +253,7 @@ async def handle_leech(client, message, gid, reply, user_id, flags):
         error_message = torrent_info['errorMessage']
         text = f'Aria2 Error Occured!\n{error_code}: {html.escape(error_message)}'
         if error_code == '7' and not error_message and torrent_info['downloadSpeed'] == '0':
-            text += '\n\nThis error may have been caused due to the torrent being too slow'
+            text += '\n\n<b>This error may have been caused due to the torrent being too slow</b>'
         await asyncio.gather(
             message.reply_text(text),
             reply.delete()
@@ -294,7 +294,7 @@ async def list_leeches(client, message):
             tor_name = os.path.basename(i['files'][0]['path'])
             if not tor_name:
                 tor_name = urldecode(os.path.basename(urlparse(i['files'][0]['uris'][0]['uri']).path))
-        a = f'''<b>{html.escape(tor_name)}</b>
+        a = f'''<b>➠ File Name : {html.escape(tor_name)}</b>
 <code>{i['gid']}</code>\n\n'''
         futtext = text + a
         if len((await parser.parse(futtext))['message']) > 4096:
@@ -303,7 +303,7 @@ async def list_leeches(client, message):
             futtext = a
         text = futtext
     if not text:
-        text = '<b>No leeches found.</b>'
+        text = '<b>No Leeches Found 🤒</b>'
     await message.reply_text(text, quote=quote)
 
 @Client.on_message(filters.command('cancel@MMLeechv5_bot') & filters.chat(ALL_CHATS))
@@ -321,25 +321,25 @@ async def cancel_leech(client, message):
         if task:
             task, starter_id = task
             if user_id != starter_id and not await allow_admin_cancel(message.chat.id, user_id):
-                await message.reply_text('<b>You did not start this leech.</b>')
+                await message.reply_text('<b>You did not start this leech 😜</b>')
             else:
                 task.cancel()
             return
         result = progress_callback_data.get(reply_identifier)
         if result:
             if user_id != result[3] and not await allow_admin_cancel(message.chat.id, user_id):
-                await message.reply_text('<b>You did not start this leech.</>')
+                await message.reply_text('<b>You did not start this leech 😜</>')
             else:
                 stop_uploads.add(reply_identifier)
-                await message.reply_text('Cancelled!')
+                await message.reply_text('❌ <b>Cancelled!</b>')
             return
         starter_id = upload_waits.get(reply_identifier)
         if starter_id:
             if user_id != starter_id[0] and not await allow_admin_cancel(message.chat.id, user_id):
-                await message.reply_text('<b>You did not start this leech.</b>')
+                await message.reply_text('<b>You did not start this leech 😜</b>')
             else:
                 stop_uploads.add(reply_identifier)
-                await message.reply_text('Cancelled!')
+                await message.reply_text('❌ <b>Cancelled!</b>')
             return
         gid = leech_statuses.get(reply_identifier)
     if not gid:
