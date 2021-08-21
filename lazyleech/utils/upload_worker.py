@@ -103,16 +103,16 @@ async def _upload_worker(client, message, reply, torrent_info, user_id, flags):
                 files[filepath] = filename
         for filepath in natsorted(files):
             sent_files.extend(await _upload_file(client, message, reply, files[filepath], filepath, ForceDocumentFlag in flags))
-    text = 'Files:\n'
+    text = '📁 Your Requested Files 👇\n\n'
     parser = pyrogram_html.HTML(client)
     quote = None
     first_index = None
     all_amount = 1
     for filename, filelink in sent_files:
         if filelink:
-            atext = f'- <a href="{filelink}">{html.escape(filename)}</a>'
+            atext = f'📤 <b><a href="{filelink}">{html.escape(filename)}</a></b>'
         else:
-            atext = f'- {html.escape(filename)} (empty)'
+            atext = f'📤 <b>{html.escape(filename)} (empty)</b>'
         atext += '\n'
         futtext = text + atext
         if all_amount > 100 or len((await parser.parse(futtext))['message']) > 4096:
