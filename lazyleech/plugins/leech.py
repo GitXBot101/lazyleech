@@ -233,14 +233,14 @@ async def handle_leech(client, message, gid, reply, user_id, flags):
         text = f'''{html.escape(tor_name)}
 <code>{html.escape(return_progress_string(completed_length, total_length))}</code>
 
-<b>GID:</b> <code>{gid}</code>
-<b>Status:</b> {status}
-<b>Total Size:</b> {formatted_total_length}
-<b>Downloaded Size:</b> {formatted_completed_length}
-<b>Download Speed:</b> {download_speed}
-<b>ETA:</b> {calculate_eta(completed_length, total_length, start_time)}'''
+<b>➠ GID:</b> <code>{gid}</code>
+<b>➠ Status:</b> {status}
+<b>➠ Total Size:</b> {formatted_total_length}
+<b>➠ Downloaded Size:</b> {formatted_completed_length}
+<b>➠ Download Speed:</b> {download_speed}
+<b>➠ ETA:</b> {calculate_eta(completed_length, total_length, start_time)}'''
         if seeders is not None:
-            text += f'\n<b>Seeders:</b> {seeders}'
+            text += f'\n<b>➠ Seeders:</b> {seeders}'
         if peers is not None:
             text += f'\n<b>{"Peers" if seeders is not None else "Connections"}:</b> {peers}'
         if (time.time() - last_edit) > PROGRESS_UPDATE_DELAY and text != prevtext:
@@ -260,7 +260,7 @@ async def handle_leech(client, message, gid, reply, user_id, flags):
         )
     elif torrent_info['status'] == 'removed':
         await asyncio.gather(
-            message.reply_text('Your download has been manually cancelled.'),
+            message.reply_text('<b>Your download has been manually cancelled.</b>'),
             reply.delete()
         )
     else:
@@ -272,7 +272,7 @@ async def handle_leech(client, message, gid, reply, user_id, flags):
         try:
             await aria2_remove(session, gid)
         except Aria2Error as ex:
-            if not (ex.error_code == 1 and ex.error_message == f'Active Download not found for GID#{gid}'):
+            if not (ex.error_code == 1 and ex.error_message == f'<b>Active Download not found for GID#{gid}</b> 🤗'):
                 raise
         finally:
             if task:
@@ -303,7 +303,7 @@ async def list_leeches(client, message):
             futtext = a
         text = futtext
     if not text:
-        text = 'No leeches found.'
+        text = '<b>No leeches found.</b>'
     await message.reply_text(text, quote=quote)
 
 @Client.on_message(filters.command('cancel@MMLeechv5_bot') & filters.chat(ALL_CHATS))
@@ -321,14 +321,14 @@ async def cancel_leech(client, message):
         if task:
             task, starter_id = task
             if user_id != starter_id and not await allow_admin_cancel(message.chat.id, user_id):
-                await message.reply_text('You did not start this leech.')
+                await message.reply_text('<b>You did not start this leech.</b>')
             else:
                 task.cancel()
             return
         result = progress_callback_data.get(reply_identifier)
         if result:
             if user_id != result[3] and not await allow_admin_cancel(message.chat.id, user_id):
-                await message.reply_text('You did not start this leech.')
+                await message.reply_text('<b>You did not start this leech.</>')
             else:
                 stop_uploads.add(reply_identifier)
                 await message.reply_text('Cancelled!')
@@ -336,7 +336,7 @@ async def cancel_leech(client, message):
         starter_id = upload_waits.get(reply_identifier)
         if starter_id:
             if user_id != starter_id[0] and not await allow_admin_cancel(message.chat.id, user_id):
-                await message.reply_text('You did not start this leech.')
+                await message.reply_text('<b>You did not start this leech.</b>')
             else:
                 stop_uploads.add(reply_identifier)
                 await message.reply_text('Cancelled!')
