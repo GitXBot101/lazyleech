@@ -230,8 +230,8 @@ async def handle_leech(client, message, gid, reply, user_id, flags):
             tor_name = os.path.basename(torrent_info['files'][0]['path'])
             if not tor_name:
                 tor_name = urldecode(os.path.basename(urlparse(torrent_info['files'][0]['uris'][0]['uri']).path))
-        text = f'''{html.escape(tor_name)}
-<code>{html.escape(return_progress_string(completed_length, total_length))}</code>
+        text = f'''<b>➠ File Name :</b>  {html.escape(tor_name)}
+<b>{html.escape(return_progress_string(completed_length, total_length))}</b>
 
 <b>➠ GID:</b> <code>{gid}</code>
 <b>➠ Status:</b> {status}
@@ -242,7 +242,7 @@ async def handle_leech(client, message, gid, reply, user_id, flags):
         if seeders is not None:
             text += f'\n<b>➠ Seeders:</b> {seeders}'
         if peers is not None:
-            text += f'\n<b>{"Peers" if seeders is not None else "Connections"}:</b> {peers}'
+            text += f'\n<b>{"Peers" if seeders is not None else "➠ Connections"}:</b> {peers}'
         if (time.time() - last_edit) > PROGRESS_UPDATE_DELAY and text != prevtext:
             await reply.edit_text(text)
             prevtext = text
