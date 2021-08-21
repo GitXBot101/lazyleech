@@ -113,7 +113,7 @@ async def _upload_worker(client, message, reply, torrent_info, user_id, flags):
             atext = f'📤 <b><a href="{filelink}">{html.escape(filename)}</a></b> \n\n💫 <b>Powered By : #MALLUMOVIES</b>'
         else:
             atext = f'📤 <b>{html.escape(filename)} (empty)</b> \n\n💫 <b>Powered By : #MALLUMOVIES</b>'
-        atext += '\n'
+        atext += '\n\n'
         futtext = text + atext
         if all_amount > 100 or len((await parser.parse(futtext))['message']) > 4096:
             thing = await message.reply_text(text, quote=quote, disable_web_page_preview=True)
@@ -132,7 +132,7 @@ async def _upload_worker(client, message, reply, torrent_info, user_id, flags):
     thing = await message.reply_text(text, quote=quote, disable_web_page_preview=True)
     if first_index is None:
         first_index = thing
-    asyncio.create_task(reply.edit_text(f'📁 <b>Uploaded Successfully:👇</b> \n\n<b>📤 Your Files:</b> <b>{first_index.link}</b>', disable_web_page_preview=True))
+    asyncio.create_task(reply.edit_text(f'📁 <b>Uploaded Successfully 👇</b> \n\n<b>📤 Your Files:</b> <b>{first_index.link}</b>', disable_web_page_preview=True))
 
 async def _upload_file(client, message, reply, filename, filepath, force_document):
     if not os.path.getsize(filepath):
