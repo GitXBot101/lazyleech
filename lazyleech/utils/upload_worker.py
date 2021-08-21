@@ -132,7 +132,7 @@ async def _upload_worker(client, message, reply, torrent_info, user_id, flags):
     thing = await message.reply_text(text, quote=quote, disable_web_page_preview=True)
     if first_index is None:
         first_index = thing
-    asyncio.create_task(reply.edit_text(f'📁 <b>Upload Successfully:👇</b> \n\n<b>📤 Your Files:</b> {first_index.link}', disable_web_page_preview=True))
+    asyncio.create_task(reply.edit_text(f'📁 <b>Uploaded Successfully:👇</b> \n\n<b>📤 Your Files:</b> <n>{first_index.link}</b>', disable_web_page_preview=True))
 
 async def _upload_file(client, message, reply, filename, filepath, force_document):
     if not os.path.getsize(filepath):
@@ -143,7 +143,7 @@ async def _upload_file(client, message, reply, filename, filepath, force_documen
     user_watermark = os.path.join(str(user_id), 'watermark.jpg')
     user_watermarked_thumbnail = os.path.join(str(user_id), 'watermarked_thumbnail.jpg')
     file_has_big = os.path.getsize(filepath) > 2097152000
-    upload_wait = await reply.reply_text(f'Upload of {html.escape(filename)} will start in {PROGRESS_UPDATE_DELAY}s')
+    upload_wait = await reply.reply_text(f'📂 <b>Upload of :</b> {html.escape(filename)} <b>Will Start in {PROGRESS_UPDATE_DELAY}s</b>')
     message_exists[upload_wait.chat.id].add(upload_wait.message_id)
     upload_identifier = (upload_wait.chat.id, upload_wait.message_id)
     async with upload_tamper_lock:
