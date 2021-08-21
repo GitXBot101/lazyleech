@@ -43,7 +43,7 @@ async def upload_worker():
         try:
             message_identifier = (reply.chat.id, reply.message_id)
             if SendAsZipFlag not in flags:
-                asyncio.create_task(reply.edit_text('Download successful, uploading files...'))
+                asyncio.create_task(reply.edit_text('📁 <b>Downloaded Successful , Now Uploading Files...</b>'))
             task = asyncio.create_task(_upload_worker(client, message, reply, torrent_info, user_id, flags))
             upload_statuses[message_identifier] = task, user_id
             await task
@@ -91,8 +91,8 @@ async def _upload_worker(client, message, reply, torrent_info, user_id, flags):
                 with zipfile.ZipFile(filepath, 'x') as zipf:
                     for file in torrent_info['files']:
                         zipf.write(file['path'], file['path'].replace(os.path.join(torrent_info['dir'], ''), '', 1))
-            await asyncio.gather(reply.edit_text('Download successful, zipping files...'), client.loop.run_in_executor(None, _zip_files))
-            asyncio.create_task(reply.edit_text('Download successful, uploading files...'))
+            await asyncio.gather(reply.edit_text('📁 <b>Downloaded Successful , Now Zipping Files...</b>'), client.loop.run_in_executor(None, _zip_files))
+            asyncio.create_task(reply.edit_text('📂 <b>Download Duccessful, Now Uploading Files...</b>'))
             files[filepath] = filename
         else:
             for file in torrent_info['files']:
@@ -132,7 +132,7 @@ async def _upload_worker(client, message, reply, torrent_info, user_id, flags):
     thing = await message.reply_text(text, quote=quote, disable_web_page_preview=True)
     if first_index is None:
         first_index = thing
-    asyncio.create_task(reply.edit_text(f'Download successful, files uploaded.\nFiles: {first_index.link}', disable_web_page_preview=True))
+    asyncio.create_task(reply.edit_text(f'📁 <b>Upload Successfully:👇</b> \n\n<b>📤 Your Files:</b> {first_index.link}', disable_web_page_preview=True))
 
 async def _upload_file(client, message, reply, filename, filepath, force_document):
     if not os.path.getsize(filepath):
