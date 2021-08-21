@@ -20,7 +20,7 @@ from pyrogram import Client, filters
 from .. import ALL_CHATS, help_dict
 from ..utils.misc import get_file_mimetype, watermark_photo
 
-@Client.on_message(filters.command(['watermark', 'savewatermark@MMLeechv5_bot', 'setwatermark@MMLeechv5_bot']) & filters.chat(ALL_CHATS))
+@Client.on_message(filters.command(['watermark', 'savewatermark@MMLeech4bot', 'setwatermark@MMLeech4bot']) & filters.chat(ALL_CHATS))
 async def savewatermark(client, message):
     reply = message.reply_to_message
     document = message.document
@@ -63,19 +63,19 @@ async def savewatermark(client, message):
         watermarked_thumbnail = os.path.join(str(user_id), 'watermarked_thumbnail.jpg')
         if os.path.isfile(thumbnail):
             await watermark_photo(thumbnail, watermark_path, watermarked_thumbnail)
-        await message.reply_text('Watermark set')
+        await message.reply_text('✅ <b>Custom video / file Watermark saved. This Watermark will be used in the upload</b> 🤒')
     else:
-        await message.reply_text('Cannot find watermark')
+        await message.reply_text('😡 <b>Reply to a photo to save custom Watermark</b> 🤕')
 
-@Client.on_message(filters.command(['clearwatermark@MMLeechv5_bot', 'rmwatermark', 'delwatermark@MMLeechv5_bot', 'removewatermark', 'deletewatermark']) & filters.chat(ALL_CHATS))
+@Client.on_message(filters.command(['clearwatermark@MMLeech4bot', 'rmwatermark', 'delwatermark@MMLeech4bot', 'removewatermark', 'deletewatermark']) & filters.chat(ALL_CHATS))
 async def rmwatermark(client, message):
     for path in ('watermark', 'watermarked_thumbnail'):
         path = os.path.join(str(message.from_user.id), f'{path}.jpg')
         if os.path.isfile(path):
             os.remove(path)
-    await message.reply_text('Watermark cleared')
+    await message.reply_text('✅ <b>Custom watermark cleared successfully</b> 🤒')
 
-@Client.on_message(filters.command('testwatermark@MMLeechv5_bot') & filters.chat(ALL_CHATS))
+@Client.on_message(filters.command('testwatermark@MMLeech4bot') & filters.chat(ALL_CHATS))
 async def testwatermark(client, message):
     watermark = os.path.join(str(message.from_user.id), 'watermark.jpg')
     if not os.path.isfile(watermark):
@@ -90,14 +90,14 @@ async def testwatermark(client, message):
         await message.reply_photo(to_upload)
 
 help_dict['watermark'] = ('Watermark',
-'''/watermark@MMLeechv5_bot <i>&lt;as reply to image or as a caption&gt;</i>
-/setwatermark@MMLeechv5_bot <i>&lt;as reply to image or as a caption&gt;</i>
-/savewatermark@MMLeechv5_bot <i>&lt;as reply to image or as a caption&gt;</i>
+'''/watermark@MMLeech4bot <i>&lt;as reply to image or as a caption&gt;</i>
+/setwatermark@MMLeech4bot <i>&lt;as reply to image or as a caption&gt;</i>
+/savewatermark@MMLeech4bot <i>&lt;as reply to image or as a caption&gt;</i>
 
-/clearwatermark@MMLeechv5_bot
+/clearwatermark@MMLeech4bot
 /rmwatermark
-/removewatermark@MMLeechv5_bot
+/removewatermark@MMLeech4bot
 /delwatermark
 /deletewatermark
 
-/testwatermark@MMLeechv5_bot''')
+/testwatermark@MMLeech4bot''')
