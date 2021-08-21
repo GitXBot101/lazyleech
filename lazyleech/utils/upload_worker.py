@@ -110,9 +110,9 @@ async def _upload_worker(client, message, reply, torrent_info, user_id, flags):
     all_amount = 1
     for filename, filelink in sent_files:
         if filelink:
-            atext = f'📤 <b><a href="{filelink}">{html.escape(filename)}</a> /n/n💫 <b>Powered By : #MALLUMOVIES</b>'
+            atext = f'📤 <b><a href="{filelink}">{html.escape(filename)}</a></b> \n\n💫 <b>Powered By : #MALLUMOVIES</b>'
         else:
-            atext = f'📤 <b>{html.escape(filename)} (empty) n/n/b>💫 Powered By : #MALLUMOVIES</b>'
+            atext = f'📤 <b>{html.escape(filename)} (empty)</b> \n\n💫 <b>Powered By : #MALLUMOVIES</b>'
         atext += '\n'
         futtext = text + atext
         if all_amount > 100 or len((await parser.parse(futtext))['message']) > 4096:
