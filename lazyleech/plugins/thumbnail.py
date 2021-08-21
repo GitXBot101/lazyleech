@@ -53,7 +53,7 @@ async def savethumbnail(client, message):
         watermarked_thumbnail = os.path.join(str(user_id), 'watermarked_thumbnail.jpg')
         if os.path.isfile(watermark):
             await watermark_photo(thumbnail_path, watermark, watermarked_thumbnail)
-        await message.reply_text('🎞️ <b>Thumbnail Set</b>')
+        await message.reply_text('✅ <b>Custom video / file thumbnail saved. This image will be used in the upload 🤒</b>')
     else:
         await message.reply_text('🤔 <b>Cannot find Thumbnail</b> 😐')
 
@@ -63,7 +63,7 @@ async def rmthumbnail(client, message):
         path = os.path.join(str(message.from_user.id), f'{path}.jpg')
         if os.path.isfile(path):
             os.remove(path)
-    await message.reply_text('🎞️ <b>Thumbnail cleared</b>')
+    await message.reply_text('✅ <b>Custom Thumbnail Cleared Successfully 😜</b>')
 
 help_dict['thumbnail'] = ('Thumbnail',
 '''/thumbnail <i>&lt;as reply to image or as a caption&gt;</i>
