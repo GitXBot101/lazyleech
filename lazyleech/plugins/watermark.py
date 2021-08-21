@@ -63,7 +63,7 @@ async def savewatermark(client, message):
         watermarked_thumbnail = os.path.join(str(user_id), 'watermarked_thumbnail.jpg')
         if os.path.isfile(thumbnail):
             await watermark_photo(thumbnail, watermark_path, watermarked_thumbnail)
-        await message.reply_text('✅ <b>Custom video / file Watermark saved. This Watermark will be used in the upload</b> 🤒')
+        await message.reply_text('✅ <b>Custom video / file Watermark saved. This Watermark will be used in this upload</b> 🤒')
     else:
         await message.reply_text('😡 <b>Reply to a photo to save custom Watermark</b> 🤕')
 
