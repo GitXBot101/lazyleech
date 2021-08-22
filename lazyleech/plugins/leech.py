@@ -124,7 +124,7 @@ async def magnet_cmd(client, message):
 
 async def initiate_magnet(client, message, link, flags):
     user_id = message.from_user.id
-    reply = await message.reply_text('Adding magnet...')
+    reply = await message.reply_text('🧲 <b>Adding Magnet Please Wait...</b>')
     try:
         gid = await asyncio.wait_for(aria2_add_magnet(session, user_id, link, LEECH_TIMEOUT), MAGNET_TIMEOUT)
     except Aria2Error as ex:
@@ -191,7 +191,7 @@ async def directdl_cmd(client, message):
 
 async def initiate_directdl(client, message, link, filename, flags):
     user_id = message.from_user.id
-    reply = await message.reply_text('Adding url...')
+    reply = await message.reply_text('📎 <b>Adding url Please Wait...</b>')
     try:
         gid = await asyncio.wait_for(aria2_add_directdl(session, user_id, link, filename, LEECH_TIMEOUT), MAGNET_TIMEOUT)
     except Aria2Error as ex:
@@ -242,7 +242,7 @@ async def handle_leech(client, message, gid, reply, user_id, flags):
         if seeders is not None:
             text += f'\n<b>➠ Seeders:</b> {seeders}'
         if peers is not None:
-            text += f'\n<b>{"Peers" if seeders is not None else "➠ Connections"}:</b> {peers}'
+            text += f'\n<b>{"➠ Peers:" if seeders is not None else "➠ Connections"}:</b> {peers}'
         if (time.time() - last_edit) > PROGRESS_UPDATE_DELAY and text != prevtext:
             await reply.edit_text(text)
             prevtext = text
