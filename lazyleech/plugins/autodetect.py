@@ -57,7 +57,7 @@ async def autodetect(client, message):
             if splitted.scheme == 'magnet' and splitted.query:
                 link = text
     if link:
-        reply = await message.reply_text(f'{"Torrent" if is_torrent else "Magnet"} detected. Select upload method', reply_markup=InlineKeyboardMarkup([
+        reply = await message.reply_text(f'🧲 <b>{"Torrent" if is_torrent else "Magnet"} Detected, Select Upload Method 👇</b>', reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton('Individual Files', 'autodetect_individual'), InlineKeyboardButton('Zip', 'autodetect_zip'), InlineKeyboardButton('Force Document', 'autodetect_file')],
             [InlineKeyboardButton('Delete', 'autodetect_delete')]
         ]))
@@ -87,7 +87,7 @@ async def autodetect_callback(client, callback_query):
     start_leech = data in ('autodetect_individual', 'autodetect_zip', 'autodetect_file')
     if start_leech:
         if getattr(message.reply_to_message, 'empty', True):
-            await callback_query.answer('Don\'t delete your message!', show_alert=True)
+            await callback_query.answer('<b>Don\'t delete your message!</b>', show_alert=True)
             return
         if data == 'autodetect_zip':
             flags = (SendAsZipFlag,)
