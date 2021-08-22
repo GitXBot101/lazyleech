@@ -307,7 +307,7 @@ async def list_leeches(client, message):
         text = '<b>No Leeches Found 🤒</b>'
     await message.reply_text(text, quote=quote)
 
-@Client.on_message(filters.command('cancel@MMLeechv5_bot') & filters.chat(ALL_CHATS))
+@Client.on_message(filters.command('cancel@MMLeech4bot') & filters.chat(ALL_CHATS))
 async def cancel_leech(client, message):
     user_id = message.from_user.id
     gid = None
