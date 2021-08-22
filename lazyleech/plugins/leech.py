@@ -231,6 +231,7 @@ async def handle_leech(client, message, gid, reply, user_id, flags):
             if not tor_name:
                 tor_name = urldecode(os.path.basename(urlparse(torrent_info['files'][0]['uris'][0]['uri']).path))
         text = f'''<b>➠ File Name :</b>  {html.escape(tor_name)}
+
 <b>{html.escape(return_progress_string(completed_length, total_length))}</b>
 
 <b>➠ GID:</b> <code>{gid}</code>
