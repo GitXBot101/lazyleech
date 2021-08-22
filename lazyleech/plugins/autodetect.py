@@ -71,15 +71,15 @@ async def autodetect_callback(client, callback_query):
     identifier = (message.chat.id, message.message_id)
     result = auto_detects.get(identifier)
     if not result:
-        await callback_query.answer('I can\'t get your message, please try again.', show_alert=True, cache_time=3600)
+        await callback_query.answer('<b>I can\'t get your message, please try again.</b>', show_alert=True, cache_time=3600)
         return
     link, user_id, init_func = result
     if callback_query.from_user.id != user_id:
-        await callback_query.answer('...no', cache_time=3600)
+        await callback_query.answer('<b>...no</b>', cache_time=3600)
         return
     async with answer_lock:
         if identifier in answered:
-            await callback_query.answer('...no')
+            await callback_query.answer('<b>...no</b>')
             return
         answered.add(identifier)
     asyncio.create_task(message.delete())
