@@ -130,7 +130,7 @@ async def initiate_magnet(client, message, link, flags):
     except Aria2Error as ex:
         await asyncio.gather(message.reply_text(f'Aria2 Error Occured!\n{ex.error_code}: {html.escape(ex.error_message)}'), reply.delete())
     except asyncio.TimeoutError:
-        await asyncio.gather(message.reply_text('Magnet timed out'), reply.delete())
+        await asyncio.gather(message.reply_text('<b>⌚ <b>Magnet timed out</b>'), reply.delete())
     else:
         await handle_leech(client, message, gid, reply, user_id, flags)
 
