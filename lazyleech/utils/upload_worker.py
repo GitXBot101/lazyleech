@@ -273,7 +273,9 @@ async def progress_callback(current, total, client, message, reply, filename, us
             else:
                 upload_speed = '0 B'
             text = f'''📁 <b>Starting Upload Of :</b> {html.escape(filename)}...
+
 <b>{html.escape(return_progress_string(current, total))}</b>
+
 <b>➠ Total Size:</b> {format_bytes(total)}
 <b>➠ Uploaded Size:</b> {format_bytes(current)}
 <b>➠ Upload Speed:</b> {upload_speed}/s
