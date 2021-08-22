@@ -268,7 +268,7 @@ async def handle_leech(client, message, gid, reply, user_id, flags):
         leech_statuses.pop(message_identifier)
         task = 2
         if upload_queue._unfinished_tasks:
-            task = asyncio.create_task(reply.edit_text('📤 <b>Download successful, ⏲️ <b>Waiting for Queue...</b>'))
+            task = asyncio.create_task(reply.edit_text('📤 <b>Download successful, ⏲️ <b>Waiting for Upload Queue...</b>'))
         upload_queue.put_nowait((client, message, reply, torrent_info, user_id, flags))
         try:
             await aria2_remove(session, gid)
