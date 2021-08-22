@@ -345,11 +345,11 @@ async def cancel_leech(client, message):
         gid = leech_statuses.get(reply_identifier)
     if not gid:
         await message.reply_text('''Usage:
-/cancel@MMLeechv5_bot <i>&lt;GID&gt;</i>
-/cancel@MMLeechv5_bot <i>(as reply to status message)</i>''')
+/cancel@MMLeech4bot <i>&lt;GID&gt;</i>
+/cancel@MMLeech4bot <i>(as reply to status message)</i>''')
         return
     if not is_gid_owner(user_id, gid) and not await allow_admin_cancel(message.chat.id, user_id):
-        await message.reply_text('You did not start this leech.')
+        await message.reply_text('<b>You did not start this leech 😜</b>')
         return
     await aria2_remove(session, gid)
 
