@@ -48,7 +48,7 @@ async def upload_worker():
             upload_statuses[message_identifier] = task, user_id
             await task
         except asyncio.CancelledError:
-            text = 'Your leech has been cancelled.'
+            text = '<b>Your leech has been cancelled 🤒</b>'
             await asyncio.gather(reply.edit_text(text), message.reply_text(text))
         except Exception as ex:
             preserved_logs.append((message, torrent_info, ex))
