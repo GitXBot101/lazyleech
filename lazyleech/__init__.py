@@ -4,16 +4,17 @@ import aiohttp
 from io import BytesIO, StringIO
 from pyrogram import Client
 
-API_ID = os.environ.get('API_ID')
-API_HASH = os.environ.get('API_HASH')
-BOT_TOKEN = os.environ.get('BOT_TOKEN')
+API_ID = os.environ.get('8978848')
+API_HASH = os.environ.get('24ce3cff2d32cf529df1c0018e28d6cf')
+BOT_TOKEN = os.environ.get('5078575505:AAGoXfcYLrtZVGDvQox2AT1SvMtL4pGhdlo')
 TESTMODE = os.environ.get('TESTMODE')
 TESTMODE = TESTMODE and TESTMODE != '0'
+DB_URL = os.environ.get('mongodb+srv://batvps:Vps336mirror15botMongodb@batvps.a7gnvvx.mongodb.net/?retryWrites=true&w=majority')
 
-EVERYONE_CHATS = os.environ.get('EVERYONE_CHATS')
-EVERYONE_CHATS = list(map(int, EVERYONE_CHATS.split(' '))) if EVERYONE_CHATS else [-1001378211961]
-ADMIN_CHATS = os.environ.get('ADMIN_CHATS')
-ADMIN_CHATS = list(map(int, ADMIN_CHATS.split(' '))) if ADMIN_CHATS else [441422215]
+EVERYONE_CHATS = os.environ.get('-1001816242004')
+EVERYONE_CHATS = list(map(int, EVERYONE_CHATS.split(' '))) if EVERYONE_CHATS else []
+ADMIN_CHATS = os.environ.get('-1001816242004')
+ADMIN_CHATS = list(map(int, ADMIN_CHATS.split(' '))) if ADMIN_CHATS else []
 ALL_CHATS = EVERYONE_CHATS + ADMIN_CHATS
 # LICHER_* variables are for @animebatchstash and similar, not required
 LICHER_CHAT = os.environ.get('LICHER_CHAT', '')
